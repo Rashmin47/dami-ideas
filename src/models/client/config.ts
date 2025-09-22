@@ -3,8 +3,8 @@ import { Client, Account, Avatars, Databases, Storage } from "appwrite";
 import { ST } from "next/dist/shared/lib/utils";
 
 const client = new Client()
-  .setEndpoint(env.appwrite.endpoint) // Your API Endpoint
-  .setProject(env.appwrite.projectId); // Your project ID
+  .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT) // Your API Endpoint
+  .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID); // Your project ID
 
 const account = new Account(client);
 

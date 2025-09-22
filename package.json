@@ -13,6 +13,7 @@
     "@radix-ui/react-label": "^2.1.7",
     "@tabler/icons-react": "^3.35.0",
     "@tailwindcss/postcss": "^4.1.11",
+    "@uiw/react-md-editor": "^4.0.8",
     "appwrite": "^18.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

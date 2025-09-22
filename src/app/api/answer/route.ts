@@ -1,5 +1,5 @@
 import { answerCollection, db } from "@/models/name";
-import { databases } from "@/models/server/config";
+import { databases, users } from "@/models/server/config";
 import { NextRequest, NextResponse } from "next/server";
 import { ID } from "node-appwrite";
 import { UserPrefs } from "@/store/Auth";
@@ -38,12 +38,15 @@ export async function POST(request: NextRequest) {
   }
 }
 
-
 export async function DELETE(request: NextRequest) {
   try {
-    const {answerId} = await request.json()
-    const answer = await databases.getDocument(db,answerCollection,answerId);
-    const response = await databases.deleteDocument(db,answerCollection,answerId);
+    const { answerId } = await request.json();
+    const answer = await databases.getDocument(db, answerCollection, answerId);
+    const response = await databases.deleteDocument(
+      db,
+      answerCollection,
+      answerId,
+    );
 
     // decrease the reputation
     const prefs = await users.getPrefs<UserPrefs>(answer.authorId);
@@ -52,13 +55,13 @@ export async function DELETE(request: NextRequest) {
     });
 
     return NextResponse.json(
-      {data:response
-      },
+      { data: response },
       {
-      status: 200,
-    });
-  } catch (error : any) {
-     return NextResponse.json(
+        status: 200,
+      },
+    );
+  } catch (error: any) {
+    return NextResponse.json(
       {
         error: error?.message || "Error deleting the answer",
       },
@@ -66,6 +69,5 @@ export async function DELETE(request: NextRequest) {
         status: error?.status || error?.code || 500,
       },
     );
-  }
   }
 }
